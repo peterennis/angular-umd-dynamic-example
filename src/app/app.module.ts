@@ -3,7 +3,7 @@ import { RouterService } from './services/router.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, COMPILER_OPTIONS, CompilerFactory, Compiler } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { ClarityModule } from '@clr/angular';
@@ -35,13 +35,13 @@ export function createCompiler(compilerFactory: CompilerFactory) {
       // {
       //   path: 'portal', loadChildren: './portal/portal.module#PortalModule'
       // }
-    ], {useHash: true}),
-    HttpModule
+    ], { useHash: true }),
+    HttpClientModule
   ],
   providers: [RouterService, ModuleService,
-    {provide: COMPILER_OPTIONS, useValue: {}, multi: true},
-    {provide: CompilerFactory, useClass: JitCompilerFactory, deps: [COMPILER_OPTIONS]},
-    {provide: Compiler, useFactory: createCompiler, deps: [CompilerFactory]}
+    { provide: COMPILER_OPTIONS, useValue: {}, multi: true },
+    { provide: CompilerFactory, useClass: JitCompilerFactory, deps: [COMPILER_OPTIONS] },
+    { provide: Compiler, useFactory: createCompiler, deps: [CompilerFactory] }
   ],
   bootstrap: [AppComponent]
 })
